@@ -1,15 +1,13 @@
-import * as redis from 'redis';
-// Ensure environment variables are properly typed
-const redisHost = process.env.REDIS_HOST as string
-const redisPort = Number(process.env.REDIS_PORT)
 
- export const redisClient = redis.createClient({
-    socket: {
-        host: redisHost,
-        port: redisPort
-    }
+
+import { createClient } from 'redis';
+
+const redisURL = process.env.REDIS_URL as string
+
+export const redisClient = createClient({
+  url: redisURL,
 });
 
 export const connectToRedis = async() => {
-    redisClient.connect().then(() => console.log("Redis Connected")).catch(err => console.log('error in redis connection',(err as Error).stack));
+    redisClient.connect().then(() => console.log("Redis Connected")).catch(err => console.log('error in redis connection',(err as Error).message));
 }
