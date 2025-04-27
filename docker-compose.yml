@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo-zimozi
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: redis-zimozi
+    ports:
+      - "6379:6379"
+
+  zimozi-task-manager:
+    build: .
+    container_name: zimozi-node-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - redis
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: npm run dev  
+
+volumes:
+  mongo-data:
