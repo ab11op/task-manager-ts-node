@@ -29,7 +29,7 @@ export const taskController = {
       }
       const savedTask = await newTask.save();
       await clearTaskCache(); // invalidate cache
-      res.status(201).json(savedTask); // Task created
+      res.status(StatusCodes.CREATED).json(savedTask); // Task created
     } catch (err) {
       console.log("error in creating task", (err as Error).stack);
       res
@@ -54,8 +54,8 @@ export const taskController = {
           .json({ message: "Invalid Task ID" });
         return;
       }
-      const task = await Task.findById(id).populate('assignedTo','name')
-        .select("title description assignedTo")
+      const task = await Task.findById(id)
+        .select("title description assignedTo _id")
         .exec();
       if (!task) {
         res.status(StatusCodes.NOT_FOUND).json({ message: "Task not found" });
@@ -158,3 +158,4 @@ export const taskController = {
     }
   },
 };
+
