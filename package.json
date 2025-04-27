@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "tsc-watch --onSuccess \"npm start\""
+    "dev": "NODE_ENV=development tsc-watch --onSuccess \"npm start\"",
+    "build": "tsc",
+    "docker:prod": " docker-compose -f docker-compose.prod.yml up --build -d",
+    "docker:dev":"docker-compose up --build -d"
   },
   "keywords": [],
   "author": "",

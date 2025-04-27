@@ -18,7 +18,7 @@ services:
   zimozi-task-manager:
     build:
       context: .
-      dockerfile: Dockerfile  # Use Dockerfile for development
+      dockerfile: Dockerfile.production  
     container_name: zimozi-node-api
     ports:
       - "3000:3000"
@@ -26,11 +26,11 @@ services:
       - mongo
       - redis
     env_file:
-      - .env.docker
+      - .env.production
     volumes:
       - .:/app
     environment:
-      - NODE_ENV=development 
+      - NODE_ENV=production # This can be adjusted for different environments
   
 volumes:
   mongo-data:

@@ -1,7 +1,11 @@
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+const env = process.env.NODE_ENV || 'development';
+const envPath = path.resolve(__dirname, `../.env.${env}`);
+dotenv.config({ path:envPath });
 import express,{Request,Response} from 'express'
 import http from 'node:http'
-import dotenv from 'dotenv'
-dotenv.config()
+import { loadConfig } from './config/env';
 import { connectToDatabase } from './database/db'
 import { requestLogger } from './middlewares/requestLogger';
 import {connectToRedis} from './utils/redis'
@@ -20,10 +24,11 @@ app.use('/api',userRouter)
 app.use('/api',taskRouter)
 const main = async () => {
     try {
-        await connectToDatabase();
-        await connectToRedis();
+        const config = await loadConfig()
+         connectToDatabase();
+         await connectToRedis();
 
-        const PORT = Number(process.env.PORT) || 3000;
+        const PORT = Number(config.port) || 3000;
 
         server.listen(PORT, () => {
             console.log(`Server is listening on PORT: ${PORT}`);
