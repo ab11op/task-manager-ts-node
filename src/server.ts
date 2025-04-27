@@ -13,13 +13,24 @@ import taskRouter from './routes/task.route'
 const server = http.createServer(app)
 app.use(express.json({limit:'50kb'}))
 app.get('/',(req:Request,res:Response) => {
-    res.json('working')
+    res.json('Task manager api working')
 })
 app.use(requestLogger)
 app.use('/api',userRouter)
 app.use('/api',taskRouter)
-connectToDatabase()
-connectToRedis()
-server.listen(3000,()=>{
-    console.log('server is up on port 3000')
-})
+const main = async () => {
+    try {
+        await connectToDatabase();
+        await connectToRedis();
+
+        const PORT = Number(process.env.PORT) || 3000;
+
+        server.listen(PORT, () => {
+            console.log(`Server is listening on PORT: ${PORT}`);
+        });
+    } catch (error) {
+        console.error('Error during startup:', error);
+        process.exit(1);
+    }
+};
+main()
