@@ -31,6 +31,7 @@ app.use('/api', taskRouter);
 export const init = async () => {
     try {
         const config = await loadConfig();
+        console.log('environment config',JSON.stringify(config))
         await connectToDatabase();
         await connectToRedis();
         return Number(config.port) || 3000;
