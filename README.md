@@ -45,18 +45,18 @@ Create environment files for different environments:
 .env.development (for local development)
 .env.docker (for running on docker)
 .env.production (for production environment)
-# .env.developmenr
+# .env.development
 
 PORT=3000
-MONGO_URI=mongodb://localhost:27017/task_manager
-REDIS_URL=redis://localhost:6379
+MONGO_URI=mongodb://<your-mongo-db-uri> (local mongodb uri)
+REDIS_URL=redis://<your-redis-url> (local redus url)
 JWT_SECRET=your_jwt_secret
 
 # .env.production (Example)
 
 PORT=3000
-MONGO_URI=mongodb://<your-mongo-db-uri>
-REDIS_URL=redis://<your-redis-url>
+MONGO_URI=mongo_production_uri
+REDIS_URL=redis_production_url
 JWT_SECRET=your_jwt_secret
 
 4. Docker Setup 
@@ -73,7 +73,7 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
 
 5. Run the Application
 For local development:
-npm run dev
+npm run dev (uses .env.development(make sure all your local ENVs are there))
 
 API Endpoints
 Authentication
