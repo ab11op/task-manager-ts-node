@@ -174,7 +174,8 @@ Set the environment variables in the Railway dashboard (e.g., MONGO_URI, REDIS_U
 
 Deploy your app using Railway's build and deploy pipeline.
 
-project-url : https://zimozi-task-manager-ts-node-production.up.railway.app
+project-url : [here](https://zimozi-task-manager-ts-node-production.up.railway.app).
+
 
 Running Tests
 To run all the test cases:
