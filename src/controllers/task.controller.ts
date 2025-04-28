@@ -19,7 +19,6 @@ export const taskController = {
         dueDate,
         assignedTo,
       });
-      console.log("assignedTo", assignedTo);
       if (!title || !description || !dueDate || !assignedTo) {
         res.status(StatusCodes.BAD_REQUEST).json({
           message:

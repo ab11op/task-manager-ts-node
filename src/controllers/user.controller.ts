@@ -62,7 +62,6 @@ export const userController = {
         JWT_SECRET,
         { expiresIn: "1h" }
       );
-      console.log('token',token)
 
       const response: loginResponse = { token };
 
